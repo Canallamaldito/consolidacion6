@@ -1,0 +1,94 @@
+{% extends "./base1.html" %}
+{% load humanize %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block title %} ADD Vehiculos {% endblock %}
+
+{% block body %}
+<div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+            <h2>Agregar Vehiculos</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/registrarauto/" method="POST">{% csrf_token %}
+                        <div class="form-group">
+                            <select id="selectMarca" name="selectMarca" class="form-control">
+                                <option value="" disabled selected>Marca</option>
+                                <option value="Fiat">Fiat</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtModelo" name="txtModelo" class="form-control" placeholder="Modelo" minlength="1" maxlength="100" requerid> 
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtSerialCarroceria" name="txtSerialCarroceria" class="form-control" placeholder="Serial Carroceria" minlength="1" maxlength="50" requerid> 
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="txtSerialMotor" name="txtSerialMotor" class="form-control" placeholder="Serial Motor" minlength="1" maxlength="50" requerid> 
+                        </div>
+                        <!--categoria-->
+                        <div class="form-group">
+                            <select id="selectCategoria" name="selectCategoria" class="form-control">
+                                <option value="" disabled selected>Categoría</option>
+                                <option value="Particular">Particular</option>
+                                <option value="Transporte">Transporte</option>
+                                <option value="Carga">Carga</option>
+                            </select>
+                        </div>                         
+                        
+                        <div class="form-group">
+                            <input type="text" id="txtPrecio" name="txtPrecio" class="form-control" placeholder="Precio" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block text-white">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--tabla-->
+        <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+            <h1>Listado de Automoviles</h1>
+            <div class="table-responsive py-2">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Marca</th>
+                            <th>Modelo</th>  
+                            <th>Serial Carroceria</th>  
+                            <th>Serial Motor</th>  
+                            <th>Categoría</th>  
+                            <th>Precio</th>    
+                            <th colspan="2">opciones</th>   
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in autos %}
+                        <tr>
+                            <td>{{x.marca}}</td>
+                            <td>{{x.modelo}}</td>
+                            <td>{{x.serialCarroceria}}</td>
+                            <td>{{x.serialMotor}}</td>
+                            <td>{{x.categoria}}</td>
+                            <td>{{ x.precio|floatformat|intcomma }}</td>
+                            <td><a href="edicionauto/{{x.id}}" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a></td>
+                            <td><a href="eliminarauto/{{x.id}}" class="btn btn-danger btnEliminacion"><i class="fa-regular fa-trash-can"></i></a></td>
+                        </tr>
+                        {% endfor %}     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+{% bootstrap_javascript %}
+
+{% endblock %}
+
+
+
+
