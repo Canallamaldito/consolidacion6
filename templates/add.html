@@ -1,8 +1,10 @@
 {% extends "./base1.html" %}
+{% load static %}
 {% load humanize %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% block title %} ADD Vehiculos {% endblock %}
+{% block JS %}{% static 'js/gestionauto.js' %}{% endblock %}
 
 {% block body %}
 <div class="row">
@@ -85,7 +87,7 @@
         </div>
 </div>
 
-{% bootstrap_javascript %}
+
 
 {% endblock %}
 

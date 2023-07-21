@@ -1,6 +1,21 @@
 let dataTable;
 let dataTableIsInitialized = false;
 
+(function () {
+
+    const btnEliminacion = document.querySelectorAll(".btnEliminacion");
+
+    btnEliminacion.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const confirmacion = confirm('¿Seguro de eliminar el curso?');
+            if (!confirmacion) {
+                e.preventDefault();
+            }
+        });
+    });
+    
+})();
+
 const dataTableOptionsX = {
     columnDefs: [
         { className: "centered", targets: [0, 1, 2, 3, 4, 5, 6, 7] },
